@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
+import { api } from '../../services/api';
 
 import { Container, RadioBox, TransactionTypeContainer } from './styles';
 
@@ -23,12 +24,14 @@ function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionModalProp
   function handleCreateNewTransaction(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    console.log({
+    const data = {
       title,
       value,
       category,
       type,
-    })
+    }
+
+    api.post('/transactions', data)
   }
 
   return (
